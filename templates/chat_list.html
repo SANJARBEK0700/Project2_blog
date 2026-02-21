@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Chatlar{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h3 class="fw-bold mb-4">💬 Chatlar</h3>
+
+    {% for chat in chats %}
+        {% with recipient=chat.get_recipient request.user %}
+        <div class="card mb-3 shadow-sm border-0 p-3">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <div>
+                    <strong>{{ recipient.username }}</strong><br>
+
+                    <small class="text-muted">
+                        {% if chat.last_message %}
+                            {{ chat.last_message.text|truncatechars:40 }}
+                        {% else %}
+                            Xabar mavjud emas
+                        {% endif %}
+                    </small>
+                </div>
+
+                <a href="#"
+                   class="btn btn-sm btn-outline-primary">
+                    Ochish
+                </a>
+
+            </div>
+
+        </div>
+        {% endwith %}
+    {% empty %}
+        <p>Chatlar mavjud emas.</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

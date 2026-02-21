@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Sharhni tahrirlash{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-0 p-4">
+
+        <h4 class="mb-3">Sharhni tahrirlash</h4>
+
+        <form method="POST">
+            {% csrf_token %}
+            <textarea name="text"
+                      class="form-control mb-3"
+                      rows="4"
+                      required>{{ comment.text }}</textarea>
+
+            <button class="btn btn-warning w-100">
+                Yangilash
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Javob yozish{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-0 p-4">
+
+        <h4 class="mb-3">Sharhga javob yozish</h4>
+
+        <div class="p-3 bg-light rounded mb-4">
+            <strong>{{ comment.user.username }}</strong>
+            <p class="mb-0">{{ comment.text }}</p>
+        </div>
+
+        <form method="POST">
+            {% csrf_token %}
+            <textarea name="reply_text"
+                      class="form-control mb-3"
+                      rows="4"
+                      placeholder="Javobingizni yozing..."
+                      required></textarea>
+
+            <button class="btn btn-primary w-100">
+                Yuborish
+            </button>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
