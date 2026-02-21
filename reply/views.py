@@ -17,7 +17,7 @@ class ReplyComment(LoginRequiredMixin, View):
 
         if comment.user == request.user:
             messages.error(request, "O'z sharhingizga javob yozishingiz mumkin emas!")
-            return redirect('post-detail', slug=comment.post.slug)
+            return redirect('post:post-detail', slug=comment.post.slug)
 
         if reply_text:
             Reply.objects.create(
@@ -26,10 +26,10 @@ class ReplyComment(LoginRequiredMixin, View):
                 text=reply_text
             )
             messages.success(request, "Javobingiz muvaffaqiyatli qo'shildi!")
-            return redirect('post-detail', slug=comment.post.slug)
+            return redirect('post:post-detail', slug=comment.post.slug)
 
         messages.warning(request, "Javob matnini kiriting!")
-        return redirect('reply_comment_page', comment_id=comment_id)
+        return redirect('reply:reply_comment_page', comment_id=comment_id)
 
 
 
@@ -44,7 +44,7 @@ class CommentUpdate(LoginRequiredMixin,View):
             comment.text=text
             comment.save()
             messages.success(request, "Sharh yangilandi")
-        return redirect('post-detail',slug=comment.post.slug)
+        return redirect('post:post-detail',slug=comment.post.slug)
 
 
 
@@ -53,7 +53,7 @@ class CommentDelete(LoginRequiredMixin,View):
         comment = get_object_or_404(Comment,id=comment_id,user=request.user)
         comment.delete()
         messages.success(request, "Sharh o‘chirildi")
-        return redirect('post-detail', slug=comment.post.slug)
+        return redirect('post:post-detail', slug=comment.post.slug)
 
 
 
@@ -87,7 +87,7 @@ def add_comment(request, slug):
                 text=text
             )
 
-    return redirect('post-detail', slug=slug)
+    return redirect('post:post-detail', slug=slug)
 
 
 

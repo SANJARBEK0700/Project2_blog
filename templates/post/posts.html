@@ -102,7 +102,7 @@
     <h3 class="fw-bold">📚 Postlar</h3>
 
     {% if user.is_authenticated %}
-        <a href="{% url 'post-create' %}" class="btn btn-primary shadow-sm">
+        <a href="{% url 'post:post-create' %}" class="btn btn-primary shadow-sm">
             ➕ Yangi post
         </a>
     {% endif %}
@@ -128,28 +128,28 @@
             <div class="card-footer bg-white border-0">
                 <div class="action-row mt-2">
 
-                    <a href="{% url 'toggle-like' post.slug %}"
+                    <a href="{% url 'blog:toggle-like' post.slug %}"
                        class="btn btn-sm btn-outline-danger">
                         ❤️ {{ post.post_likes.count }}
                     </a>
 
-                    <a href="{% url 'toggle-wishlist' post.slug %}"
+                    <a href="{% url 'blog:toggle-wishlist' post.slug %}"
                        class="btn btn-sm btn-outline-warning">
                         ⭐ {{ post.wishlist.count }}
                     </a>
 
-                    <a href="{% url 'post-detail' post.slug %}"
+                    <a href="{% url 'post:post-detail' post.slug %}"
                        class="btn btn-sm btn-outline-primary">
                         Batafsil
                     </a>
 
                     {% if user == post.user %}
-                        <a href="{% url 'post-update' post.slug %}"
+                        <a href="{% url 'post:post-update' post.slug %}"
                            class="btn btn-sm btn-outline-warning">
                             ✏️
                         </a>
 
-                        <a href="{% url 'post-delete' post.slug %}"
+                        <a href="{% url 'post:post-delete' post.slug %}"
                            class="btn btn-sm btn-outline-danger">
                             🗑
                         </a>

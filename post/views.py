@@ -47,11 +47,13 @@ class PostDetailView(DetailView):
 
         return obj
 
+
+
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post/post_form.html'
     fields = ['title', 'content', 'image', 'video', 'category']
-    success_url = reverse_lazy('post-list')
+    success_url = reverse_lazy('post:post-list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -65,7 +67,7 @@ class PostUpdateView(LoginRequiredMixin, OwnerRequiredMixin, UpdateView):
     slug_url_kwarg = 'slug'
 
     def get_success_url(self):
-        return reverse_lazy('post-detail', kwargs={'slug': self.object.slug})
+        return reverse_lazy('post:post-detail', kwargs={'slug': self.object.slug})
 
 
 
@@ -74,7 +76,7 @@ class PostDeleteView(LoginRequiredMixin, OwnerRequiredMixin, DeleteView):
     template_name = 'post/post_confirm_delete.html'
     slug_field = 'slug'
     slug_url_kwarg = 'slug'
-    success_url = reverse_lazy('post-list')
+    success_url = reverse_lazy('post:post-list')
 
 
 def home_view(request):

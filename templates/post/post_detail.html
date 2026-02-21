@@ -29,15 +29,15 @@
             <div class="d-flex gap-3 mt-3">
 
                 <!-- LIKE -->
-                <a href="{% url 'toggle-like' post.slug %}"
+                <a href="{% url 'blog:toggle-like' post.slug %}"
                    class="btn btn-outline-danger">
 
-                    ❤️ {{ post.post_likes.count }}
+                    ❤️ {{ post.wishlist.count }}
 
                 </a>
 
                 <!-- WISHLIST -->
-                <a href="{% url 'toggle-wishlist' post.slug %}"
+                <a href="{% url 'blog:toggle-wishlist' post.slug %}"
                    class="btn btn-outline-warning">
 
                     ⭐ {{ post.wishlist.count }}
@@ -54,7 +54,7 @@
     <div class="card shadow-sm border-0 mb-4 p-4">
         <h5 class="mb-3">Izoh qoldirish</h5>
 
-        <form method="POST" action="{% url 'add-comment' post.slug %}">
+        <form method="POST" action="{% url 'reply:add-comment' post.slug %}">
             {% csrf_token %}
             <textarea name="text"
                       class="form-control mb-3"
@@ -89,19 +89,19 @@
 
             <div class="d-flex gap-2">
 
-                <a href="{% url 'reply_comment_page' comment.id %}"
+                <a href="{% url 'reply:reply_comment_page' comment.id %}"
                    class="btn btn-sm btn-outline-primary">
                     ↩️ Javob
                 </a>
 
                 {% if user == comment.user %}
-                    <a href="{% url 'comment_update' comment.id %}"
+                    <a href="{% url 'reply:comment_update' comment.id %}"
                        class="btn btn-sm btn-outline-warning">
                         ✏️
                     </a>
 
                     <form method="POST"
-                          action="{% url 'comment_delete' comment.id %}">
+                          action="{% url 'reply:comment_delete' comment.id %}">
                         {% csrf_token %}
                         <button class="btn btn-sm btn-outline-danger">
                             🗑
